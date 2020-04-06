@@ -1,0 +1,20 @@
+.ava ul {
+    margin: 0;
+    padding: 0;
+}
+
+.messages {
+    display: flex;
+    padding: 15px;
+    width: 500px;
+}
+
+.ava {
+    margin-right: 30px;
+}
+
+.texts {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}

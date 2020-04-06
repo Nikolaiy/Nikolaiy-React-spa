@@ -1,0 +1,13 @@
+.bg img {
+    height: 50px;
+}
+
+.profileTitle {
+    text-align: center;
+    color: red;
+}
+
+.form {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}

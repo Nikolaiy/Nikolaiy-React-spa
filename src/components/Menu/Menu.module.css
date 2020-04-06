@@ -1,0 +1,33 @@
+.menu {
+    background: cadetblue;
+    width: 25%;
+}
+
+.avatar {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.avatar img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+}
+
+a.active {
+    color: blue;
+}
+
+ul {
+    padding-left: 10px;
+}
+
+li {
+    list-style-type: none;
+}
+
