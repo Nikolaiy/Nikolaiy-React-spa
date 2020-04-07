@@ -5,8 +5,6 @@ import Menu from './components/Menu/Menu';
 import Profile from './components/Profile/Profile';
 import Messages from "./components/Messages/Messages";
 import {BrowserRouter, Route} from "react-router-dom"
-import {addMessage} from "./redux/state";
-// import {addPost} from "./redux/state";
 
 
 const App = (props) => {
@@ -19,12 +17,11 @@ const App = (props) => {
                     <Route path='/profile'
                            render={() => <Profile
                                state={props.state.profilePage}
-                               addPost={props.addPost}
-                               updateNewPostText={props.updateNewPostText}/>}/>
+                               dispatch={props.dispatch}/>}/>
                     <Route path='/messages'
                            render={() => <Messages
                                state={props.state.messagePage}
-                               addMessage={props.addMessage}/>}/>
+                               dispatch={props.dispatch}/>}/>
                 </div>
             </div>
         </div>

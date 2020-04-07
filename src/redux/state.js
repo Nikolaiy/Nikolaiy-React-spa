@@ -1,3 +1,7 @@
+import profileReducer from "./profile-reducer";
+import messageReducer from "./message-reducer";
+import friendReducer from "./friend-reducer";
+
 const store = {
     _state: {
         profilePage: {
@@ -31,39 +35,25 @@ const store = {
             ]
         }
     },
-    getState() {
-        return this._state
-    },
     _rerenderEntireTree() {
         console.log('State changed')
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText= '';
-        this._rerenderEntireTree(this._state);
-    },
-    addMessage(postMessage) {
-        let newMessage = {
-            id: 5,
-            text: postMessage
-        };
-        this._state.messagePage.text.push(newMessage);
-        this._rerenderEntireTree(this._state)
-    },
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._rerenderEntireTree(this._state);
+
+    getState() {
+        return this._state
     },
     subscribe(observer) {
         this._rerenderEntireTree = observer;
+    },
+
+    dispatch(action) {
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagePage = messageReducer(this._state.messagePage, action)
+        // this._state.friendsPage = friendReducer(this._state.friendsPage, action)
+        this._rerenderEntireTree(this._state)
+
     }
 }
 
-
-window.store = store;
 export default store
