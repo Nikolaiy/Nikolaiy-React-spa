@@ -6,7 +6,7 @@ let initialState = {
         ]
 };
 
-const friendReducer = (state =initialState, action) => {
+const friendReducer = (state = initialState, action) => {
     return state
 };
 

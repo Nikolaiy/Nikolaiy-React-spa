@@ -13,9 +13,9 @@ const Menu = (props) => {
                 <ul className={s.item}>
                     <li><NavLink to="/profile" activeClassName={s.active}>Profile</NavLink></li>
                     <li><NavLink to="/messages" activeClassName={s.active}>Messages</NavLink></li>
+                    <li><NavLink to="/friends" activeClassName={s.active}>Friends</NavLink></li>
                     {/*<li><a href="#">Posts</a></li>*/}
                     <li><a href="#">Settings</a></li>
-                    <li><a href="#">Friends</a></li>
                 </ul>
             </div>
             <div>
