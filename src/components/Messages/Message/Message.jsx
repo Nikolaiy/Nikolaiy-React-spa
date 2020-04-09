@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './Message.module.css'
 import {NavLink} from "react-router-dom";
-import {addMessageActionCreator} from "./../../../redux/message-reducer";
 
 
 const MessageItem = (props) => {
@@ -27,8 +26,12 @@ const Message = (props) => {
     let addMessageElement = React.createRef();
 
     let addMessage = () => {
+        props.addMessage();
+    }
+
+    let onMessageChange = () => {
         let text = addMessageElement.current.value;
-        props.dispatch(addMessageActionCreator(text));
+        props.onMessageChange(text);
     }
 
     return (
@@ -50,7 +53,10 @@ const Message = (props) => {
             </div>
             <div className={s.form}>
                 <form action="">
-                    <textarea ref={addMessageElement} name="" id="" cols="30" rows="10"/>
+                    <textarea onChange={onMessageChange}
+                              ref={addMessageElement}
+                              type='text'
+                              value={props.state.newMessageText} />
                 </form>
                 <button onClick={addMessage}>addMessage</button>
             </div>
