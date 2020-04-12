@@ -3,16 +3,7 @@ const UN_FOLOVING = 'UN_FOLOVING';
 const SET_USERS = 'SET_USERS';
 
 const initialize = {
-    users: [
-        {id: 1, folov: true,
-            photoUrl: 'https://st3.depositphotos.com/15648834/17930/v/1600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg', name: 'Nikolay', status: 'Big boss', country: 'Russia', sity: 'EKB'},
-        {id: 2, folov: false,
-            photoUrl: 'https://st3.depositphotos.com/15648834/17930/v/1600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg', name: 'Kirill', status: 'Big boss', country: 'Russia', sity: 'EKB'},
-        {id: 3, folov: false,
-            photoUrl: 'https://st3.depositphotos.com/15648834/17930/v/1600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg', name: 'Misha', status: 'Big boss', country: 'Russia', sity: 'MSK'},
-        {id: 4, folov: true,
-            photoUrl: 'https://st3.depositphotos.com/15648834/17930/v/1600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg', name: 'Natasha', status: 'Big boss', country: 'Russia', sity: 'NVS'}
-    ]
+    users: [],
 };
 
 const usersReducer = (state = initialize, action) => {
