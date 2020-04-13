@@ -7,6 +7,7 @@ const initialize = {
 };
 
 const usersReducer = (state = initialize, action) => {
+    debugger
     switch (action.type) {
         case FOLOVING:
             return {
