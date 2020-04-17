@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {folovAC, setActivePageAC, setIsFetchingAC, setUsersAC, unfolovAC} from "../../redux/users-reducer";
+import {folov, setActivePage, setIsFetching, setUsers, unfolov} from "../../redux/users-reducer";
 import Users from "./Users";
 import * as axios from "axios";
-import preloader from '../../assets/images/preloader.gif'
+import Preloader from "../../common/Preloader/preloader";
 
 class UsersAPIContainer extends React.Component {
 
@@ -25,15 +25,18 @@ class UsersAPIContainer extends React.Component {
     };
 
     render() {
+        debugger
         return (
             <>
                 <h1>FRIENDS</h1>
-                {this.props.isFetching ? <img src={preloader}/> : null}
+                {this.props.isFetching ? <Preloader/> : null}
                 <Users totalCount={this.props.totalCount}
                        pageCount={this.props.pageCount}
                        activePage={this.props.activePage}
                        users={this.props.users}
-                       onActivePage={this.onActivePage}/>
+                       onActivePage={this.onActivePage}
+                       folov={this.props.folov}
+                       unfolov={this.props.unfolov}/>
             </>
         )
     }
@@ -46,27 +49,30 @@ let mapStateToProps = (state) => {
         pageCount: state.usersPage.pageCount,
         activePage: state.usersPage.activePage,
         isFetching: state.usersPage.isFetching,
+        folov: state.usersPage.folov,
+        unfolov: state.usersPage.unfolov,
     }
 };
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        folov: (userId) => {
-            dispatch(folovAC(userId))
-        },
-        upfolov: (userId) => {
-            dispatch(unfolovAC(userId))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users))
-        },
-        setActivePage: (pagination) => {
-            dispatch(setActivePageAC(pagination))
-        },
-        setIsFetching: (isFetching) => {
-            dispatch(setIsFetchingAC(isFetching))
-        },
-    }
-};
+// let mapDispatchToProps = (dispatch) => {
+//     return {
+//         folov: (userId) => {
+//             dispatch(folovAC(userId))
+//         },
+//         upfolov: (userId) => {
+//             dispatch(unfolovAC(userId))
+//         },
+//         setUsers: (users) => {
+//             dispatch(setUsersAC(users))
+//         },
+//         setActivePage: (pagination) => {
+//             dispatch(setActivePageAC(pagination))
+//         },
+//         setIsFetching: (isFetching) => {
+//             dispatch(setIsFetchingAC(isFetching))
+//         },
+//     }
+// };
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer);
+export const UsersContainer = connect(mapStateToProps,
+    {folov, unfolov, setUsers, setActivePage, setIsFetching,})(UsersAPIContainer);

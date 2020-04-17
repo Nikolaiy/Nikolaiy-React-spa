@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './Profile.module.css'
 import Post from "./Posts/Post";
+import Preloader from "../../common/Preloader/preloader";
 
 const Profile = (props) => {
-
     let postsData = props.posts.map(text =>
         <Post message={text.message}
               count={text.likesCount} key={text.id}/>)
@@ -19,6 +19,10 @@ const Profile = (props) => {
         props.updateNewPostText(text);
     }
 
+    if (!props.profile) {
+        return <Preloader/>
+    }
+
     return (
         <div className={s.profile}>
             <div className={s.bg}>
@@ -28,6 +32,16 @@ const Profile = (props) => {
             </div>
             <div className={s.profileTitle}>
                 <h1>Profile</h1>
+            </div>
+            <div className={s.user}>
+                <div>
+                    <img src={props.profile.photos.small}/>
+                </div>
+                <div>
+                    {props.profile.aboutMe} <br/>
+                    {props.profile.fullName} <br/>
+
+                </div>
             </div>
             <div className={s.form}>
                 <form action="">

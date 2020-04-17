@@ -19,7 +19,7 @@ const usersReducer = (state = initialize, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, folov: false}
+                        return {...u, folov: true}
                     }
                     return u;
                 })
@@ -29,7 +29,7 @@ const usersReducer = (state = initialize, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, folov: true}
+                        return {...u, folov: false}
                     }
                     return u;
                 })
@@ -46,11 +46,11 @@ const usersReducer = (state = initialize, action) => {
     ;
 };
 
-export const folovAC = (userId) => ({type: FOLOVING, userId});
-export const unfolovAC = (userId) => ({type: UN_FOLOVING, userId});
-export const setUsersAC = (users) => ({type: SET_USERS, users});
-export const setActivePageAC = (newPages) => ({type: SET_ACTIVE_PAGE, newPages});
-export const setIsFetchingAC = (isFetching) => ({type: SET_IS_FETCHING, isFetching})
+export const folov = (userId) => ({type: FOLOVING, userId});
+export const unfolov = (userId) => ({type: UN_FOLOVING, userId});
+export const setUsers = (users) => ({type: SET_USERS, users});
+export const setActivePage = (newPages) => ({type: SET_ACTIVE_PAGE, newPages});
+export const setIsFetching = (isFetching) => ({type: SET_IS_FETCHING, isFetching});
 
 
 export default usersReducer;

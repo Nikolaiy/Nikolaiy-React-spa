@@ -1,9 +1,11 @@
 import React from 'react';
 import s from './Users.module.css';
 import userPhoto from "../../assets/images/user.png";
+import {NavLink} from "react-router-dom";
 
 
 const Users = (props) => {
+    debugger
 
     let pageChange = Math.ceil(props.totalCount / props.pageCount);
 
@@ -26,14 +28,17 @@ const Users = (props) => {
             </div>
             {props.users.map(u => <div key={u.id}>
                     <div className={s.img}>
-                        <img src={u.photoUrl != null ? u.photoUrl : userPhoto} alt=""/>
+                        <NavLink to={'./profile/' + u.id}>
+                            <img src={u.photoUrl != null ? u.photoUrl : userPhoto} alt=""/>
+                        </NavLink>
                     </div>
                     <div>
-                        {u.folov ? <button onClick={() => {
-                                props.folov(u.id)
+                        {u.folov
+                            ? <button onClick={() => {
+                                props.unfolov(u.id)
                             }}>Folov</button>
                             : <button onClick={() => {
-                                props.upfolov(u.id)
+                                props.folov(u.id)
                             }}>Upfolov</button>}
                     </div>
                     <div>
