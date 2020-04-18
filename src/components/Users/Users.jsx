@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Users.module.css';
 import userPhoto from "../../assets/images/user.png";
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
+import {follow, unfollow} from "../../API/api";
 
 
 const Users = (props) => {
@@ -35,30 +35,18 @@ const Users = (props) => {
                     <div>
                         {u.folov
                             ? <button onClick={() => {
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': '0bef6b48-7f84-43ca-905f-8c552e5d5a91'
+                                follow().then((response) => {
+                                    if (response.data.resultCode == 0) {
+                                        props.unfolov(u.id)
                                     }
                                 })
-                                    .then((response) => {
-                                        if (response.data.resultCode == 0) {
-                                            props.unfolov(u.id)
-                                        }
-                                    })
                             }}>Folov</button>
                             : <button onClick={() => {
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': '0bef6b48-7f84-43ca-905f-8c552e5d5a91'
+                                unfollow().then((response) => {
+                                    if (response.data.resultCode == 0) {
+                                        props.folov(u.id)
                                     }
                                 })
-                                    .then((response) => {
-                                        if (response.data.resultCode == 0) {
-                                            props.folov(u.id)
-                                        }
-                                    })
                             }}>Upfolov</button>}
                     </div>
                     <div>
