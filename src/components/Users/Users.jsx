@@ -2,10 +2,10 @@ import React from 'react';
 import s from './Users.module.css';
 import userPhoto from "../../assets/images/user.png";
 import {NavLink} from "react-router-dom";
+import * as axios from "axios";
 
 
 const Users = (props) => {
-    debugger
 
     let pageChange = Math.ceil(props.totalCount / props.pageCount);
 
@@ -35,10 +35,30 @@ const Users = (props) => {
                     <div>
                         {u.folov
                             ? <button onClick={() => {
-                                props.unfolov(u.id)
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'API-KEY': '0bef6b48-7f84-43ca-905f-8c552e5d5a91'
+                                    }
+                                })
+                                    .then((response) => {
+                                        if (response.data.resultCode == 0) {
+                                            props.unfolov(u.id)
+                                        }
+                                    })
                             }}>Folov</button>
                             : <button onClick={() => {
-                                props.folov(u.id)
+                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'API-KEY': '0bef6b48-7f84-43ca-905f-8c552e5d5a91'
+                                    }
+                                })
+                                    .then((response) => {
+                                        if (response.data.resultCode == 0) {
+                                            props.folov(u.id)
+                                        }
+                                    })
                             }}>Upfolov</button>}
                     </div>
                     <div>

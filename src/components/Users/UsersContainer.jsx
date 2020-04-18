@@ -9,7 +9,10 @@ class UsersAPIContainer extends React.Component {
 
     componentDidMount() {
         this.props.setIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.pageCount}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.pageCount}`, {
+            withCredentials: true
+        })
+            .then(response => {
             this.props.setIsFetching(false);
             this.props.setUsers(response.data.items)
         });
@@ -18,14 +21,16 @@ class UsersAPIContainer extends React.Component {
     onActivePage = (pageNumber) => {
         this.props.setActivePage(pageNumber);
         this.props.setIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageCount}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageCount}`, {
+            withCredentials: true
+        })
+            .then(response => {
             this.props.setIsFetching(false);
             this.props.setUsers(response.data.items)
         });
     };
 
     render() {
-        debugger
         return (
             <>
                 <h1>FRIENDS</h1>
