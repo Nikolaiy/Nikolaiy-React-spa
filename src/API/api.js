@@ -10,22 +10,26 @@ const authKey = {
 };
 
 
-export const getUsers = () => {
-    return axios.get(urlBase + `users?page=${this.props.activePage}&count=${this.props.pageCount}`, {
-        withCredentials: true
-    })
+export const getUsers = (activePage = 1, pageCount = 10) => {
+    return axios.get(urlBase + `users?page=${activePage}&count=${pageCount}`,
+        {
+            withCredentials: true
+        })
 };
-export const activePage = (pageNumber) => {
-    return axios.get(urlBase + `users?page=${pageNumber}&count=${this.props.pageCount}`, {
+export const activePage = (pageNumber, pageCount) => {
+    return axios.get(urlBase + `users?page=${pageNumber}&count=${pageCount}`, {
         withCredentials: true
     })
 };
 export const follow = (userId) => {
-    axios.delete(urlBase + `follow/${userId}`, authKey)
+    return axios.delete(urlBase + `follow/${userId}`, authKey)
 };
 export const unfollow = (userId) => {
-    axios.post(urlBase + `follow/${userId}`, {}, authKey)
+    return axios.post(urlBase + `follow/${userId}`, {}, authKey)
 };
 export const authMe = () => {
-    axios.get(urlBase + 'auth/me', auth)
+    return axios.get(urlBase + 'auth/me', auth)
 };
+export const profilePage = (userId) => {
+    return axios.get(urlBase + 'profile/' + userId)
+}

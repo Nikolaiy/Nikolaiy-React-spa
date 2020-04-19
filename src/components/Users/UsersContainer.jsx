@@ -9,16 +9,18 @@ class UsersAPIContainer extends React.Component {
 
     componentDidMount() {
         this.props.setIsFetching(true);
-       getUsers().then(response => {
+       getUsers(this.props.activePage, this.props.pageCount)
+           .then(response => {
             this.props.setIsFetching(false);
             this.props.setUsers(response.data.items)
         });
     };
 
     onActivePage = (pageNumber) => {
-        this.props.setActivePage(pageNumber);
-        this.props.setIsFetching(true);
-        activePage().then(response => {
+            this.props.setActivePage(pageNumber);
+            this.props.setIsFetching(true);
+        getUsers(pageNumber, this.props.pageCount)
+            .then(response => {
             this.props.setIsFetching(false);
             this.props.setUsers(response.data.items)
         });

@@ -2,17 +2,15 @@ import React from 'react';
 import {addPostActionCreator, onPostChangeActionCreator, setUserProfile} from "../../redux/profile-reducer";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import * as axios from "axios";
 import {withRouter} from "react-router";
+import {profilePage} from "../../API/api";
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if (!userId) {
-            userId = 12
-        }
-        axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId).then(response => {
+        if (!userId) { userId = 12 }
+        profilePage(userId).then(response => {
             this.props.setUserProfile(response.data)
         })
     }
