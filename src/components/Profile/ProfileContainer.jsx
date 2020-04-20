@@ -10,12 +10,13 @@ class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) { userId = 12 }
-        profilePage(userId).then(response => {
-            this.props.setUserProfile(response.data)
+        profilePage(userId).then(data => {
+            this.props.setUserProfile(data)
         })
     }
 
     render() {
+        debugger
         return (
             <Profile {...this.props} profile={this.props.profile}/>
         )

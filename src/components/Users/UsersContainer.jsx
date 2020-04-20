@@ -1,28 +1,35 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {folov, setActivePage, setIsFetching, setUsers, unfolov} from "../../redux/users-reducer";
+import {
+    folov,
+    setActivePage,
+    setIsFetching,
+    setUsers,
+    toggleFollowingProgress,
+    unfolov
+} from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/preloader";
-import {activePage, getUsers} from "../../API/api";
+import { userAPI } from "../../API/api";
 
 class UsersAPIContainer extends React.Component {
 
     componentDidMount() {
         this.props.setIsFetching(true);
-       getUsers(this.props.activePage, this.props.pageCount)
-           .then(response => {
+        userAPI.getUsers(this.props.activePage, this.props.pageCount)
+           .then(data => {
             this.props.setIsFetching(false);
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(data.items)
         });
     };
 
     onActivePage = (pageNumber) => {
             this.props.setActivePage(pageNumber);
             this.props.setIsFetching(true);
-        getUsers(pageNumber, this.props.pageCount)
-            .then(response => {
+        userAPI.getUsers(pageNumber, this.props.pageCount)
+            .then(data => {
             this.props.setIsFetching(false);
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(data.items)
         });
     };
 
@@ -37,7 +44,10 @@ class UsersAPIContainer extends React.Component {
                        users={this.props.users}
                        onActivePage={this.onActivePage}
                        folov={this.props.folov}
-                       unfolov={this.props.unfolov}/>
+                       unfolov={this.props.unfolov}
+                       followingInProgress={this.props.followingInProgress}
+                       toggleFollowingProgress={this.props.toggleFollowingProgress}
+                />
             </>
         )
     }
@@ -52,8 +62,9 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching,
         folov: state.usersPage.folov,
         unfolov: state.usersPage.unfolov,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 };
 
 export const UsersContainer = connect(mapStateToProps,
-    {folov, unfolov, setUsers, setActivePage, setIsFetching,})(UsersAPIContainer);
+    {folov, unfolov, setUsers, setActivePage, setIsFetching, toggleFollowingProgress})(UsersAPIContainer);

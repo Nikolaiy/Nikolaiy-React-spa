@@ -6,7 +6,6 @@ import {follow, unfollow} from "../../API/api";
 
 
 const Users = (props) => {
-    debugger
 
     let pageChange = Math.ceil(props.totalCount / props.pageCount);
 
@@ -35,18 +34,22 @@ const Users = (props) => {
                     </div>
                     <div>
                         {u.folov
-                            ? <button onClick={() => {
-                                follow(u.id).then((response) => {
-                                    if (response.data.resultCode == 0) {
+                            ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.toggleFollowingProgress(true, u.id);
+                                follow(u.id).then(data => {
+                                    if (data.resultCode == 0) {
                                         props.unfolov(u.id)
                                     }
+                                    props.toggleFollowingProgress(false, u.id);
                                 })
                             }}>Folov</button>
-                            : <button onClick={() => {
-                                unfollow(u.id).then((response) => {
-                                    if (response.data.resultCode == 0) {
+                            : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.toggleFollowingProgress(true, u.id);
+                                unfollow(u.id).then(data => {
+                                    if (data.resultCode == 0) {
                                         props.folov(u.id)
                                     }
+                                    props.toggleFollowingProgress(false, u.id);
                                 })
                             }}>Upfolov</button>}
                     </div>

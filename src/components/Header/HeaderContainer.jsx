@@ -7,9 +7,9 @@ import {authMe} from "../../API/api";
 class HeaderContainer extends React.Component {
 
     componentDidMount() {
-        authMe().then(response => {
-            if (response.data.resultCode == 0) {
-                let {id, email, login} = response.data.data
+        authMe().then(data => {
+            if (data.resultCode == 0) {
+                let {id, email, login} = data.data
                 this.props.setUserData(id, email, login)
             }
         })
