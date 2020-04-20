@@ -2,35 +2,23 @@ import React from 'react';
 import {connect} from "react-redux";
 import {
     folov,
+    getUsers,
     setActivePage,
     setIsFetching,
     setUsers,
-    toggleFollowingProgress,
     unfolov
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/preloader";
-import { userAPI } from "../../API/api";
 
 class UsersAPIContainer extends React.Component {
 
     componentDidMount() {
-        this.props.setIsFetching(true);
-        userAPI.getUsers(this.props.activePage, this.props.pageCount)
-           .then(data => {
-            this.props.setIsFetching(false);
-            this.props.setUsers(data.items)
-        });
+        this.props.getUsers(this.props.activePage, this.props.pageCount);
     };
 
     onActivePage = (pageNumber) => {
-            this.props.setActivePage(pageNumber);
-            this.props.setIsFetching(true);
-        userAPI.getUsers(pageNumber, this.props.pageCount)
-            .then(data => {
-            this.props.setIsFetching(false);
-            this.props.setUsers(data.items)
-        });
+        this.props.getUsers(pageNumber, this.props.pageCount)
     };
 
     render() {
@@ -46,7 +34,6 @@ class UsersAPIContainer extends React.Component {
                        folov={this.props.folov}
                        unfolov={this.props.unfolov}
                        followingInProgress={this.props.followingInProgress}
-                       toggleFollowingProgress={this.props.toggleFollowingProgress}
                 />
             </>
         )
@@ -66,5 +53,4 @@ let mapStateToProps = (state) => {
     }
 };
 
-export const UsersContainer = connect(mapStateToProps,
-    {folov, unfolov, setUsers, setActivePage, setIsFetching, toggleFollowingProgress})(UsersAPIContainer);
+export const UsersContainer = connect(mapStateToProps, {folov, unfolov, setUsers, setActivePage, setIsFetching, getUsers})(UsersAPIContainer);

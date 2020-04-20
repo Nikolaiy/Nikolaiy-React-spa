@@ -12,7 +12,7 @@ export const userAPI = {
         return instance.get(`users?page=${activePage}&count=${pageCount}`)
             .then(response => response.data)
     }
-}
+};
 
 
 export const follow = (userId) => {
