@@ -16,7 +16,7 @@ const Profile = (props) => {
 
     let onPostChange = () => {
         let text = addPostElement.current.value;
-        props.updateNewPostText(text);
+        props.onPostChange(text);
     }
 
     if (!props.profile) {

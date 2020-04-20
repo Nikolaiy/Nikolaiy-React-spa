@@ -1,19 +1,18 @@
 import React from 'react';
-import {addPostActionCreator, getProfile, onPostChangeActionCreator, setUserProfile} from "../../redux/profile-reducer";
+import {
+    addPost,
+    getProfile, onPostChange,
+} from "../../redux/profile-reducer";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
-import {profilePage} from "../../API/api";
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        getProfile()
         let userId = this.props.match.params.userId;
         if (!userId) { userId = 12 }
-        profilePage(userId).then(data => {
-            this.props.setUserProfile(data)
-        })
+        this.props.getProfile(userId)
     }
 
     render() {
@@ -34,7 +33,7 @@ let mapStateToProps = (state) => {
 const WithUrlProfileContainer = withRouter(ProfileContainer);
 
 export default connect(mapStateToProps, {
-    addPost: addPostActionCreator,
-    updateNewPostText: onPostChangeActionCreator,
-    setUserProfile
+    addPost,
+    onPostChange,
+    getProfile
 })(WithUrlProfileContainer);

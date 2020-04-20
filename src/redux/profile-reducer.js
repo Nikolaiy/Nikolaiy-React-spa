@@ -1,4 +1,4 @@
-import {profilePage} from "../API/api";
+import { userAPI } from "../API/api";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_NEXT = 'UPDATE-NEW-POST-TEXT';
@@ -35,17 +35,13 @@ const profileReducer = (state = initialState, action) => {
     ;
 };
 
-export const addPostActionCreator = () => ({type: ADD_POST});
-export const onPostChangeActionCreator = (text) => ({type: UPDATE_NEW_POST_NEXT, text: text});
+export const addPost = () => ({type: ADD_POST});
+export const onPostChange = (text) => ({type: UPDATE_NEW_POST_NEXT, text: text});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
-export const getProfile = () => {
+export const getProfile = (userId) => {
     return (dispatch) => {
-        let userId = this.props.match.params.userId;
-        if (!userId) {
-            userId = 12
-        }
-        profilePage(userId).then(data => {
+        userAPI.profilePage(userId).then(data => {
             dispatch(setUserProfile(data));
         })
     }

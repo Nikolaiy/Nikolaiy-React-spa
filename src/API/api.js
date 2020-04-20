@@ -11,23 +11,22 @@ export const userAPI = {
     getUsers(activePage = 1, pageCount = 10) {
         return instance.get(`users?page=${activePage}&count=${pageCount}`)
             .then(response => response.data)
-    }
+    },
+    follow(userId) {
+        return instance.delete(`follow/${userId}`)
+            .then(response => response.data)
+    },
+    unfollow(userId) {
+        return instance.post(`follow/${userId}`,)
+            .then(response => response.data)
+    },
+    profilePage(userId) {
+        return instance.get('profile/' + userId)
+            .then(response => response.data)
+    },
+    authMe() {
+        return instance.get('auth/me')
+            .then(response => response.data)
+    },
 };
 
-
-export const follow = (userId) => {
-    return instance.delete(`follow/${userId}`)
-        .then(response => response.data)
-};
-export const unfollow = (userId) => {
-    return instance.post(`follow/${userId}`,)
-        .then(response => response.data)
-};
-export const authMe = () => {
-    return instance.get('auth/me')
-        .then(response => response.data)
-};
-export const profilePage = (userId) => {
-    return instance.get('profile/' + userId)
-        .then(response => response.data)
-};
