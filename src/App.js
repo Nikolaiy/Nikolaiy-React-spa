@@ -3,8 +3,8 @@ import './App.css';
 import Menu from './components/Menu/Menu';
 import {Route} from "react-router-dom"
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import MessageContainer from "./components/Messages/Message/MessageContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import MessageContainer from "./components/Messages/MessageContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 

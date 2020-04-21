@@ -34,10 +34,6 @@ const Message = (props) => {
         props.onMessageChange(text);
     }
 
-    if(!props.isAuth) {
-      return <Redirect to='/login'/>
-    };
-
     return (
         <div className={s.wraperMessages}>
             <div className={s.messages}>

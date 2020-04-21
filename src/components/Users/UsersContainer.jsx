@@ -10,8 +10,10 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/preloader";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
-class UsersAPIContainer extends React.Component {
+class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.getUsers(this.props.activePage, this.props.pageCount);
@@ -53,4 +55,8 @@ let mapStateToProps = (state) => {
     }
 };
 
-export const UsersContainer = connect(mapStateToProps, {folov, unfolov, setUsers, setActivePage, setIsFetching, getUsers})(UsersAPIContainer);
+
+export default compose(
+    connect(mapStateToProps, {folov, unfolov, setUsers, setActivePage, setIsFetching, getUsers}),
+    withAuthRedirect,
+)(UsersContainer)
