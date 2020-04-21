@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Message.module.css'
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 
 const MessageItem = (props) => {
@@ -33,6 +33,10 @@ const Message = (props) => {
         let text = addMessageElement.current.value;
         props.onMessageChange(text);
     }
+
+    if(!props.isAuth) {
+      return <Redirect to='/login'/>
+    };
 
     return (
         <div className={s.wraperMessages}>

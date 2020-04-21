@@ -9,7 +9,7 @@ const Header = (props) => {
                 <img src="http://www.cscl.ru/images/articles/logo-cs-1-6.jpg" alt=""/>
             </div>
             <div>
-                {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+                {props.isAuth ? <NavLink to='/login'>{props.login}</NavLink> : <NavLink to='/login'>Login</NavLink>}
             </div>
             <div className={s.search}>
                 <form action="">
