@@ -2,12 +2,12 @@ import React from 'react';
 import {addMessageActionCreator, onMessageChangeActionCreator} from "./../../../redux/message-reducer";
 import Message from "./Message";
 import {connect} from "react-redux";
+import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 
 let mapStateToProps = (state) => {
     return {
         state: state.messagePage,
         newMessageText: state.messagePage.newMessageText,
-        isAuth: state.authReducer.isAuth,
     }
 };
 
@@ -22,7 +22,7 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
-const MessageContainer = connect (mapStateToProps, mapDispatchToProps)(Message);
+const MessageContainer = connect (mapStateToProps, mapDispatchToProps)(withAuthRedirect(Message));
 
 
 export default MessageContainer;
