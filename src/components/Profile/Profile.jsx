@@ -1,7 +1,8 @@
 import React from 'react';
 import s from './Profile.module.css'
 import Post from "./Posts/Post";
-import Preloader from "../../common/Preloader/preloader";
+import Preloader from '../../common/Preloader/preloader';
+import {StatusUser} from './StatusUser';
 
 const Profile = (props) => {
     let postsData = props.posts.map(text =>
@@ -25,11 +26,6 @@ const Profile = (props) => {
 
     return (
         <div className={s.profile}>
-            <div className={s.bg}>
-                <img
-                    src="https://st3.depositphotos.com/10654668/15053/i/1600/depositphotos_150535932-stock-photo-one-yellow-tulip.jpg"
-                    alt=""/>
-            </div>
             <div className={s.profileTitle}>
                 <h1>Profile</h1>
             </div>
@@ -42,6 +38,7 @@ const Profile = (props) => {
                     {props.profile.fullName} <br/>
 
                 </div>
+                <StatusUser status={'Hello my friend'} />
             </div>
             <div className={s.form}>
                 <form action="">

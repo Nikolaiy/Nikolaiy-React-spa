@@ -31,12 +31,11 @@ const profileReducer = (state = initialState, action) => {
             return {...state, profile: action.profile}
         default:
             return state;
-    }
-    ;
+    };
 };
 
 export const addPost = () => ({type: ADD_POST});
-export const onPostChange = (text) => ({type: UPDATE_NEW_POST_NEXT, text: text});
+export const onPostChange = (text) => ({type: UPDATE_NEW_POST_NEXT, text});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
 export const getProfile = (userId) => {
