@@ -21,8 +21,8 @@ export const userAPI = {
             .then(response => response.data)
     },
     profilePage(userId) {
-        return instance.get('profile/' + userId)
-            .then(response => response.data)
+        console.warn('Используйте obj ProfileAPI')
+        return profileAPI.profilePage(userId)
     },
     authMe() {
         return instance.get('auth/me')
@@ -30,3 +30,17 @@ export const userAPI = {
     },
 };
 
+export const profileAPI = {
+    profilePage(userId) {
+        return instance.get('profile/' + userId)
+            .then(response => response.data)
+    },
+    getStatus(userId) {
+        return instance.get('profile/status/' + userId)
+            .then(response => response.data)
+    },
+    updateStatus(status) {
+        return instance.put('profile/status/', { status: status })
+            .then(response => response.data)
+    },
+};

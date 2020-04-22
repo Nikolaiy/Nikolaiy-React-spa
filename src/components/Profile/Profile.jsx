@@ -38,7 +38,7 @@ const Profile = (props) => {
                     {props.profile.fullName} <br/>
 
                 </div>
-                <StatusUser status={'Hello my friend'} />
+                <StatusUser status={props.status} updateStatus={props.updateStatus} />
             </div>
             <div className={s.form}>
                 <form action="">
