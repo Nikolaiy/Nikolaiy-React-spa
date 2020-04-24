@@ -3,7 +3,7 @@ import Message from "./Message";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {addMessage, onMessageChange} from "../../redux/message-reducer";
+import {addMessage} from "../../redux/message-reducer";
 
 let mapStateToProps = (state) => {
     return {
@@ -13,6 +13,6 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-    connect (mapStateToProps, {addMessage, onMessageChange}),
-    withAuthRedirect
+    connect (mapStateToProps, {addMessage}),
+    // withAuthRedirect
 )(Message)

@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Message.module.css'
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import { MessageReduxForm } from "./FormMessage";
 
 
 const MessageItem = (props) => {
@@ -23,16 +24,11 @@ const Message = (props) => {
     let MessageElement = props.state.messages.map(message => <MessageItem id={message.id} name={message.name}/>);
     let TextElement = props.state.text.map(text => <MessageText id={text.id} text={text.text}/>);
 
-    let addMessageElement = React.createRef();
 
-    let addMessage = () => {
-        props.addMessage();
-    }
+    let addNewMessage = (value) => {
+        props.addMessage(value.newMessageText)
+    };
 
-    let onMessageChange = () => {
-        let text = addMessageElement.current.value;
-        props.onMessageChange(text);
-    }
 
     return (
         <div className={s.wraperMessages}>
@@ -52,13 +48,7 @@ const Message = (props) => {
                 </div>
             </div>
             <div className={s.form}>
-                <form action="">
-                    <textarea onChange={onMessageChange}
-                              ref={addMessageElement}
-                              type='text'
-                              value={props.state.newMessageText} />
-                </form>
-                <button onClick={addMessage}>addMessage</button>
+                <MessageReduxForm onSubmit={addNewMessage} />
             </div>
         </div>
     );

@@ -3,21 +3,15 @@ import s from './Profile.module.css'
 import Post from "./Posts/Post";
 import Preloader from '../../common/Preloader/preloader';
 import {StatusUser} from './StatusUser';
+import {ProfileReduxForm} from "./ProfileForm";
 
 const Profile = (props) => {
     let postsData = props.posts.map(text =>
         <Post message={text.message}
               count={text.likesCount} key={text.id}/>)
 
-    let addPostElement = React.createRef();
-
-    let addPost = () => {
-        props.addPost();
-    }
-
-    let onPostChange = () => {
-        let text = addPostElement.current.value;
-        props.onPostChange(text);
+    let addNewText = (value) => {
+        props.addPost(value.newPostText)
     }
 
     if (!props.profile) {
@@ -41,12 +35,7 @@ const Profile = (props) => {
                 <StatusUser status={props.status} updateStatus={props.updateStatus} />
             </div>
             <div className={s.form}>
-                <form action="">
-                    <textarea onChange={onPostChange}
-                              ref={addPostElement} type="text"
-                              value={props.newPostText}/>
-                </form>
-                <button onClick={addPost}>Add</button>
+                <ProfileReduxForm onSubmit={addNewText}/>
             </div>
             <div className={s.content}>
                 {postsData}

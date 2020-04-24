@@ -1,4 +1,3 @@
-const NEW_MESSAGE = 'NEW-MESSAGE';
 const ADDED_NEW_MESSAGE = 'ADDED-NEW-MESSAGE';
 
 let initialState = {
@@ -15,7 +14,6 @@ let initialState = {
             {id: 3, text: 'How are you'},
             {id: 4, text: 'Welcome'}
         ],
-        newMessageText: ''
 };
 
 const messageReducer = (state = initialState, action) => {
@@ -23,20 +21,13 @@ const messageReducer = (state = initialState, action) => {
         case ADDED_NEW_MESSAGE:
             return {
                 ...state,
-                newMessageText: '',
-                text: [...state.text, { id: 5, text: state.newMessageText }]
-            };
-        case NEW_MESSAGE:
-            return {
-                ...state,
-                newMessageText: action.text
+                text: [...state.text, { id: 5, text: action.newMessageText }]
             };
         default:
             return state;
     };
 };
 
-export const addMessage = () => ({type: ADDED_NEW_MESSAGE});
-export const onMessageChange = (text) => ({ type: NEW_MESSAGE, text: text });
+export const addMessage = (newMessageText) => ({type: ADDED_NEW_MESSAGE, newMessageText});
 
 export default messageReducer
