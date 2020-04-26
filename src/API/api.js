@@ -24,10 +24,6 @@ export const userAPI = {
         console.warn('Используйте obj ProfileAPI')
         return profileAPI.profilePage(userId)
     },
-    authMe() {
-        return instance.get('auth/me')
-            .then(response => response.data)
-    },
 };
 
 export const profileAPI = {
@@ -40,7 +36,22 @@ export const profileAPI = {
             .then(response => response.data)
     },
     updateStatus(status) {
-        return instance.put('profile/status/', { status: status })
+        return instance.put('profile/status/', { status })
             .then(response => response.data)
     },
 };
+
+export const authMeApi = {
+    authMe() {
+        return instance.get('auth/me')
+            .then(response => response.data)
+    },
+    login(email, password, rememberMe) {
+        return instance.post('auth/login', {email, password, rememberMe})
+            .then(response => response.data)
+    },
+    logout() {
+        return instance.delete('auth/login')
+            .then(response => response.data)
+    }
+}
