@@ -12,11 +12,11 @@ const Profile = (props) => {
 
     let addNewText = (value) => {
         props.addPost(value.newPostText)
-    }
+    };
 
     if (!props.profile) {
         return <Preloader/>
-    }
+    };
 
     return (
         <div className={s.profile}>
