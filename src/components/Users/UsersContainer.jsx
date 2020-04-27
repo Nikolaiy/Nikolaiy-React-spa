@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {
     folov,
-    getUsers,
+    responseUsers,
     setActivePage,
     setIsFetching,
     setUsers,
@@ -12,15 +12,23 @@ import Users from "./Users";
 import Preloader from "../../common/Preloader/preloader";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {
+    getActivePage, getFollowingInProgress,
+    getFolov,
+    getIsFetching,
+    getPageCount,
+    getTotalCount, getUnfolov,
+    getUsers
+} from "../../redux/users-selectors";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers(this.props.activePage, this.props.pageCount);
+        this.props.responseUsers(this.props.activePage, this.props.pageCount);
     };
 
     onActivePage = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageCount)
+        this.props.responseUsers(pageNumber, this.props.pageCount)
     };
 
     render() {
@@ -44,19 +52,19 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        totalCount: state.usersPage.totalCount,
-        pageCount: state.usersPage.pageCount,
-        activePage: state.usersPage.activePage,
-        isFetching: state.usersPage.isFetching,
-        folov: state.usersPage.folov,
-        unfolov: state.usersPage.unfolov,
-        followingInProgress: state.usersPage.followingInProgress,
+        users: getUsers(state),
+        totalCount: getTotalCount(state),
+        pageCount: getPageCount(state),
+        activePage: getActivePage(state),
+        isFetching: getIsFetching(state),
+        folov: getFolov(state),
+        unfolov: getUnfolov(state),
+        followingInProgress: getFollowingInProgress(state),
     }
 };
 
 
 export default compose(
-    connect(mapStateToProps, {folov, unfolov, setUsers, setActivePage, setIsFetching, getUsers}),
+    connect(mapStateToProps, {folov, unfolov, setUsers, setActivePage, setIsFetching, responseUsers}),
     withAuthRedirect,
 )(UsersContainer)

@@ -65,7 +65,7 @@ export const setActivePage = (newPages) => ({type: SET_ACTIVE_PAGE, newPages});
 export const setIsFetching = (isFetching) => ({type: SET_IS_FETCHING, isFetching});
 export const toggleFollowingProgress = (isFetching, userId) => ({type: SET_FOLLOWING_PROGRESS, isFetching, userId});
 
-export const getUsers = (activePage, pageCount) => {
+export const responseUsers = (activePage, pageCount) => {
 
     return (dispatch) => {
 
