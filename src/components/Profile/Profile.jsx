@@ -2,8 +2,8 @@ import React from 'react';
 import s from './Profile.module.css'
 import Post from "./Posts/Post";
 import Preloader from '../../common/Preloader/preloader';
-import {StatusUser} from './StatusUser';
 import {ProfileReduxForm} from "./ProfileForm";
+import StatusUserHooks from "./StatusUserHooks";
 
 const Profile = (props) => {
     let postsData = props.posts.map(text =>
@@ -32,7 +32,7 @@ const Profile = (props) => {
                     {props.profile.fullName} <br/>
 
                 </div>
-                <StatusUser status={props.status} updateStatus={props.updateStatus} />
+                <StatusUserHooks status={props.status} updateStatus={props.updateStatus} />
             </div>
             <div className={s.form}>
                 <ProfileReduxForm onSubmit={addNewText}/>
