@@ -72,7 +72,7 @@ export const responseUsers = (activePage, pageCount) => {
         dispatch(setActivePage(activePage));
         dispatch(setIsFetching(true));
 
-        userAPI.getUsers(activePage, pageCount)
+        userAPI.responseUsers(activePage, pageCount)
             .then(data => {
                 dispatch(setIsFetching(false));
                 dispatch(setUsers(data.items))

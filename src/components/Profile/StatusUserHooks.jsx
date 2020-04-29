@@ -14,7 +14,7 @@ const StatusUserHooks = (props) => {
     };
 
     let deactivateEditMode = () => {
-        setEditMode(false)
+        setEditMode(false);
         props.updateStatus(status)
     };
 

@@ -66,5 +66,5 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {folov, unfolov, setUsers, setActivePage, setIsFetching, responseUsers}),
-    withAuthRedirect,
+    // withAuthRedirect,
 )(UsersContainer)
