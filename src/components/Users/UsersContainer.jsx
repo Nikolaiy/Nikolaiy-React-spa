@@ -4,7 +4,7 @@ import {
     folov,
     responseUsers,
     setActivePage,
-    setIsFetching,
+    setIsFetching, setTotalUsersCounter,
     setUsers,
     unfolov
 } from "../../redux/users-reducer";
@@ -65,6 +65,6 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, {folov, unfolov, setUsers, setActivePage, setIsFetching, responseUsers}),
+    connect(mapStateToProps, {folov, unfolov, setUsers, setActivePage, setIsFetching, responseUsers, setTotalUsersCounter}),
     // withAuthRedirect,
 )(UsersContainer)
