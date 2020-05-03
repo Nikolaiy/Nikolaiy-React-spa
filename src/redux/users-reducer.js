@@ -11,7 +11,7 @@ const SET_FOLLOWING_PROGRESS = 'users/SET_FOLLOWING_PROGRESS';
 const initialize = {
     users: [],
     pageCount: 5,
-    totalCount: 20,
+    totalCount: 200,
     activePage: 1,
     isFetching: false,
     followingInProgress: [],
