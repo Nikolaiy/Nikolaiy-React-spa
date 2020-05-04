@@ -2,8 +2,6 @@ import React from 'react';
 import './App.css';
 import Menu from './components/Menu/Menu';
 import {Route} from "react-router-dom"
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import MessageContainer from "./components/Messages/MessageContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -12,6 +10,10 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {getInitialized} from "./redux/app-reducer";
 import Preloader from "./common/Preloader/preloader";
+import LazyLoader from "./common/Suspense/Suspens";
+
+const MessageContainer = React.lazy(() => import("./components/Messages/MessageContainer"));
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"))
 
 
 class App extends React.Component {
@@ -32,8 +34,8 @@ class App extends React.Component {
                 <div className="wrapper">
                     <Menu state={this.props.state.friendPage}/>
                     <div className="content">
-                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                        <Route path='/messages' render={() => <MessageContainer/>}/>
+                        <Route path='/profile/:userId?' render={LazyLoader(ProfileContainer)}/>
+                        <Route path='/messages' render={LazyLoader(MessageContainer)}/>
                         <Route path='/friends' render={() => <UsersContainer/>}/>
                         <Route path='/login' render={() => <Login/>}/>
                     </div>

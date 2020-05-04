@@ -3,7 +3,6 @@ import s from './Paginator.module.css';
 
 
 const Paginator = (props, {sectionSize = 10}) => {
-    debugger
 
     let pageChange = Math.ceil(props.totalCount / props.pageCount);
     let pages = [];
