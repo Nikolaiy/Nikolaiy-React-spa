@@ -6,7 +6,7 @@ export const Textarea = ({input, meta: {touched, error}, ...props}) => {
     return (
         <div className="form-group">
             <form action="" className=''>
-                <textarea {...input} {...props} className={(hasError ? s.inputError : '')}/>
+                <textarea {...input} {...props} className={`${hasError ? s.inputError : ''}`}/>
                 {hasError && <div className={s.textError}>{error}</div>}
             </form>
         </div>
@@ -17,7 +17,7 @@ export const Input = ({input, meta: {touched, error}, ...props}) => {
     let hasError = error && touched;
     return (
         <div className="form-group">
-            <input {...input} {...props} className={(hasError ? s.inputError : '')}/>
+            <input {...input} {...props} className={`'form-control' ${hasError ? s.inputError : ''}`}/>
             {hasError && <div className={s.textError}>{error}</div>}
         </div>
     )
