@@ -4,11 +4,12 @@ import Post from "./Posts/Post";
 import Preloader from '../../common/Preloader/preloader';
 import {ProfileReduxForm} from "./ProfileForm";
 import StatusUserHooks from "./StatusUserHooks";
+import user from '../../assets/images/user.png';
 
 const Profile = (props) => {
     let postsData = props.posts.map(text =>
         <Post message={text.message}
-              count={text.likesCount} key={text.id}/>)
+              count={text.likesCount} key={text.id}/>);
 
     let addNewText = (value) => {
         props.addPost(value.newPostText)
@@ -25,7 +26,7 @@ const Profile = (props) => {
             </div>
             <div className={s.user}>
                 <div>
-                    <img src={props.profile.photos.small}/>
+                    <img src={props.profile.photos.small || user}/>
                 </div>
                 <div>
                     {props.profile.aboutMe} <br/>

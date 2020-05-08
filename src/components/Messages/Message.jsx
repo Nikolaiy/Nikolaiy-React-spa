@@ -21,8 +21,8 @@ const MessageText = (props) => {
 };
 
 const Message = (props) => {
-    let MessageElement = props.state.messages.map(message => <MessageItem id={message.id} name={message.name}/>);
-    let TextElement = props.state.text.map(text => <MessageText id={text.id} text={text.text}/>);
+    let MessageElement = props.state.messages.map(message => <MessageItem id={message.id} name={message.name} key={message.id}/>);
+    let TextElement = props.state.text.map(text => <MessageText id={text.id} text={text.text} key={text.id}/>);
 
 
     let addNewMessage = (value) => {

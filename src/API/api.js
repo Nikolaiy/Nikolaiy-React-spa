@@ -20,10 +20,6 @@ export const userAPI = {
         return instance.post(`follow/${userId}`,)
             .then(response => response.data)
     },
-    profilePage(userId) {
-        console.warn('Используйте obj ProfileAPI')
-        return profileAPI.profilePage(userId)
-    },
 };
 
 export const profileAPI = {
