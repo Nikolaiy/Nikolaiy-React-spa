@@ -1,4 +1,4 @@
-import { profileAPI } from "../API/api";
+import {profileAPI, userAPI} from "../API/api";
 
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
@@ -27,8 +27,7 @@ const profileReducer = (state = initialState, action) => {
             return {...state, status: action.status};
         default:
             return state;
-    }
-    ;
+    };
 };
 
 export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
