@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     addPost,
-    getProfile, getStatus,
+    getProfile, getStatus, onPutPhotos,
     updateStatus,
 } from "../../redux/profile-reducer";
 import Profile from "./Profile";
@@ -30,7 +30,6 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger
         if (this.props.match.params.userId != prevProps.match.params.userId){
             this.refreshProfile();
         }
@@ -39,7 +38,7 @@ class ProfileContainer extends React.Component {
     render() {
         return (
             <Profile {...this.props} profile={this.props.profile} status={this.props.status}
-                     updateStatus={this.props.updateStatus}/>
+                     updateStatus={this.props.updateStatus} onPutPhotos={this.props.onPutPhotos}/>
         )
     }
 }
@@ -55,7 +54,7 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {addPost, getProfile, getStatus, updateStatus}),
+    connect(mapStateToProps, {addPost, getProfile, getStatus, updateStatus, onPutPhotos}),
     withRouter,
     withAuthRedirect,
 )(ProfileContainer)

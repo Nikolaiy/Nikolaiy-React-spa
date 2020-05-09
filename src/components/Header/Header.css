@@ -36,7 +36,7 @@
     justify-content: space-between;
 }
 
-img {
+.header__right img {
     width: 30px;
     height: 30px;
 }

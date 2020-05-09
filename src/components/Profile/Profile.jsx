@@ -4,6 +4,7 @@ import Post from "./Posts/Post";
 import Preloader from '../../common/Preloader/preloader';
 import {ProfileReduxForm} from "./ProfileForm";
 import StatusUserHooks from "./StatusUserHooks";
+import user from '../../assets/images/user.png'
 
 const Profile = (props) => {
     let postsData = props.posts.map(text =>
@@ -18,6 +19,12 @@ const Profile = (props) => {
         return <Preloader/>
     };
 
+    const onLoadingPhoto = (e) => {
+        if (e.target.files.length) {
+            props.onPutPhotos(e.target.files[0])
+        }
+    };
+
     return (
         <div className={s.profile}>
             <div className={s.profileTitle}>
@@ -25,8 +32,9 @@ const Profile = (props) => {
             </div>
             <div className={s.user}>
                 <div>
-                    <img src={props.profile.photos.small}/>
+                    <img src={props.profile.photos.large || user}/>
                 </div>
+                <input type="file" onChange={onLoadingPhoto}/>
                 <div>
                     {props.profile.aboutMe} <br/>
                     {props.profile.fullName} <br/>
