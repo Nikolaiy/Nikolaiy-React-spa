@@ -34,7 +34,7 @@ const Profile = (props) => {
                 <div>
                     <img src={props.profile.photos.large || user}/>
                 </div>
-                <input type="file" onChange={onLoadingPhoto}/>
+                {props.isOwner ? <input type="file" onChange={onLoadingPhoto}/> : null}
                 <div>
                     {props.profile.aboutMe} <br/>
                     {props.profile.fullName} <br/>
