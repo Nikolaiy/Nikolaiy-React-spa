@@ -1,23 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './Profile.module.css'
 import Post from "./Posts/Post";
-import Preloader from '../../common/Preloader/preloader';
-import {ProfileReduxForm} from "./ProfileForm";
+import ProfileUser from "./ProfileUser/ProfileUser";
+import ProfileUserFormRedax from "./ProfileUser/ProfileUserForm";
+import user from "../../assets/images/user.png";
+import Preloader from "../../common/Preloader/preloader";
 import StatusUserHooks from "./StatusUserHooks";
-import user from '../../assets/images/user.png'
+import {ProfileReduxForm} from "./ProfileForm";
 
 const Profile = (props) => {
-    let postsData = props.posts.map(text =>
-        <Post message={text.message}
-              count={text.likesCount} key={text.id}/>)
+
+    const [editMode, setEditMode] = useState(true);
 
     let addNewText = (value) => {
         props.addPost(value.newPostText)
     };
 
-    if (!props.profile) {
-        return <Preloader/>
-    };
+    let postsData = props.posts.map(text =>
+        <Post message={text.message}
+              count={text.likesCount} key={text.id}/>);
 
     const onLoadingPhoto = (e) => {
         if (e.target.files.length) {
@@ -25,25 +26,34 @@ const Profile = (props) => {
         }
     };
 
+    const openFormProfile = () => {
+        setEditMode(false)
+    };
+
+    if (!props.profile) {
+        return <Preloader/>
+    };
+
     return (
-        <div className={s.profile}>
+        <div>
             <div className={s.profileTitle}>
                 <h1>Profile</h1>
             </div>
-            <div className={s.user}>
-                <div>
-                    <img src={props.profile.photos.large || user}/>
+            <div className={s.profile}>
+                <div className={s.user}>
+                    <div>
+                        <img src={props.profile.photos.large || user}/>
+                    </div>
                 </div>
-                {props.isOwner ? <input type="file" onChange={onLoadingPhoto}/> : null}
-                <div>
-                    {props.profile.aboutMe} <br/>
-                    {props.profile.fullName} <br/>
-
-                </div>
-                <StatusUserHooks status={props.status} updateStatus={props.updateStatus} />
             </div>
-            <div className={s.form}>
-                <ProfileReduxForm onSubmit={addNewText}/>
+            <div className={s.userInfo}>
+                {props.isOwner ? <input type="file" onChange={onLoadingPhoto}/> : null}
+                <div><b>Name: </b>{props.profile.fullName}</div>
+                {editMode ? <ProfileUser profile={props.profile} openFormProfile={openFormProfile} isOwner={props.isOwner}/> : <ProfileUserFormRedax profile={props.profile}/>}
+                <StatusUserHooks status={props.status} updateStatus={props.updateStatus}/>
+                <div className={s.form}>
+                    <ProfileReduxForm onSubmit={addNewText}/>
+                </div>
             </div>
             <div className={s.content}>
                 {postsData}

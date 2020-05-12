@@ -25,7 +25,6 @@ const profileReducer = (state = initialState, action) => {
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
         case SET_PHOTOS:
-            debugger
             return {...state, profile: {...state.profile, photos: action.photos}};
         case SET_STATUS:
             return {...state, status: action.status};
@@ -61,13 +60,19 @@ export const updateStatus = (status) => async (dispatch) => {
 };
 
 export const onPutPhotos = (file) => async (dispatch) => {
-    debugger
     let data = await profileAPI.photosLoad(file);
 
     if (data.resultCode === 0) {
-        debugger
         dispatch(setPhotos(data.data.photos))
     }
 };
+
+export const handleSubmit = (profile) => async (dispatch) => {
+    let data = await profileAPI.profilInfo(profile);
+
+    if (data.resulCode === 0) {
+        // dispatch()
+    }
+}
 
 export default profileReducer

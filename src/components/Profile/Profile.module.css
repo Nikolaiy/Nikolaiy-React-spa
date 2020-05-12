@@ -16,3 +16,21 @@
     margin-left: 20px;
     margin-bottom: 15px;
 }
+
+.contacts {
+    padding-left: 15px;
+}
+
+.contactsForm {
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
+
+.userInfo {
+    padding-left: 15px;
+}
+
+.formContact {
+    font-weight: bold;
+    display: block;
+}
