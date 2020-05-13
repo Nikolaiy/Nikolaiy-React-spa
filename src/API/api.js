@@ -45,6 +45,11 @@ export const profileAPI = {
         })
             .then(response => response.data)
     },
+    changeProfilInfo(profile) {
+        debugger
+        return instance.put('profile', profile)
+            .then(response => response.data)
+    }
 };
 
 export const authMeApi = {

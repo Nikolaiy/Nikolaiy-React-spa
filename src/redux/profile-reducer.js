@@ -67,10 +67,11 @@ export const onPutPhotos = (file) => async (dispatch) => {
     }
 };
 
-export const handleSubmit = (profile) => async (dispatch) => {
-    let data = await profileAPI.profilInfo(profile);
+export const saveProfile = (profile) => async (dispatch) => {
+    debugger
+    let data = await profileAPI.changeProfilInfo(profile);
 
-    if (data.resulCode === 0) {
+    if (data.resultCode === 0) {
         // dispatch()
     }
 }

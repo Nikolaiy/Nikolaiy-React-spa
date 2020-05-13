@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import s from './Profile.module.css'
 import Post from "./Posts/Post";
 import ProfileUser from "./ProfileUser/ProfileUser";
-import ProfileUserFormRedax from "./ProfileUser/ProfileUserForm";
+import {ProfileUserFormRedax} from "./ProfileUser/ProfileUserForm";
 import user from "../../assets/images/user.png";
 import Preloader from "../../common/Preloader/preloader";
 import StatusUserHooks from "./StatusUserHooks";
@@ -10,7 +10,7 @@ import {ProfileReduxForm} from "./ProfileForm";
 
 const Profile = (props) => {
 
-    const [editMode, setEditMode] = useState(true);
+    const [editMode, setEditMode] = useState(false);
 
     let addNewText = (value) => {
         props.addPost(value.newPostText)
@@ -27,12 +27,16 @@ const Profile = (props) => {
     };
 
     const openFormProfile = () => {
-        setEditMode(false)
+        setEditMode(true)
     };
 
     if (!props.profile) {
         return <Preloader/>
     };
+
+    const onSubmitForm = (formData) => {
+        props.saveProfile(formData)
+    }
 
     return (
         <div>
@@ -49,7 +53,7 @@ const Profile = (props) => {
             <div className={s.userInfo}>
                 {props.isOwner ? <input type="file" onChange={onLoadingPhoto}/> : null}
                 <div><b>Name: </b>{props.profile.fullName}</div>
-                {editMode ? <ProfileUser profile={props.profile} openFormProfile={openFormProfile} isOwner={props.isOwner}/> : <ProfileUserFormRedax profile={props.profile}/>}
+                {editMode ? <ProfileUserFormRedax profile={props.profile} onSubmit={onSubmitForm}/> : <ProfileUser profile={props.profile} openFormProfile={openFormProfile} isOwner={props.isOwner}/> }
                 <StatusUserHooks status={props.status} updateStatus={props.updateStatus}/>
                 <div className={s.form}>
                     <ProfileReduxForm onSubmit={addNewText}/>

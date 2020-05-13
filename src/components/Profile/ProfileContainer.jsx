@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     addPost,
-    getProfile, getStatus, onPutPhotos,
+    getProfile, getStatus, onPutPhotos, saveProfile,
     updateStatus,
 } from "../../redux/profile-reducer";
 import Profile from "./Profile";
@@ -39,7 +39,7 @@ class ProfileContainer extends React.Component {
         return (
             <Profile {...this.props} profile={this.props.profile} status={this.props.status}
                      updateStatus={this.props.updateStatus} onPutPhotos={this.props.onPutPhotos}
-            isOwner={!this.props.match.params.userId}/>
+            isOwner={!this.props.match.params.userId} onSubmitProfileForm={this.props.saveProfile}/>
         )
     }
 }
@@ -54,8 +54,9 @@ let mapStateToProps = (state) => {
     }
 };
 
+
 export default compose(
-    connect(mapStateToProps, {addPost, getProfile, getStatus, updateStatus, onPutPhotos, }),
+    connect(mapStateToProps, {addPost, getProfile, getStatus, updateStatus, onPutPhotos, saveProfile}),
     withRouter,
     withAuthRedirect,
 )(ProfileContainer)
