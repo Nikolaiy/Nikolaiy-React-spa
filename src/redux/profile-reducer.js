@@ -1,4 +1,5 @@
 import {profileAPI} from "../API/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
@@ -12,7 +13,7 @@ let initialState = {
         {id: 3, message: "You are country", likesCount: 11}
     ],
     profile: null,
-    status: 'Mig',
+    status: '',
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -30,8 +31,7 @@ const profileReducer = (state = initialState, action) => {
             return {...state, status: action.status};
         default:
             return state;
-    }
-    ;
+    };
 };
 
 export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
@@ -52,7 +52,7 @@ export const getStatus = (userId) => async (dispatch) => {
 };
 
 export const updateStatus = (status) => async (dispatch) => {
-    let data = await profileAPI.updateStatus(status)
+    let data = await profileAPI.updateStatus(status);
 
     if (data.resultCode === 0) {
         dispatch(setStatus(status))
@@ -67,13 +67,19 @@ export const onPutPhotos = (file) => async (dispatch) => {
     }
 };
 
-export const saveProfile = (profile) => async (dispatch) => {
-    debugger
+export const saveProfile = (profile) => async (dispatch, getState) => {
+    const userId = getState().authReducer.userId;
+
     let data = await profileAPI.changeProfilInfo(profile);
 
     if (data.resultCode === 0) {
-        // dispatch()
+        debugger
+         dispatch(getProfile(userId))
+    } else {
+        debugger
+        dispatch(stopSubmit('profileInfo', {_error: data.messages[0]}))
+        return Promise.reject(data.messages[0])
     }
-}
+};
 
-export default profileReducer
+export default profileReducer;

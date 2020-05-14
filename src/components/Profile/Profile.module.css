@@ -34,3 +34,9 @@
     font-weight: bold;
     display: block;
 }
+
+.formError {
+    color: red;
+    margin-top: 15px;
+    border: 1px solid red;
+}

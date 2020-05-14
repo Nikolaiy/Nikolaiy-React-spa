@@ -32,11 +32,16 @@ const Profile = (props) => {
 
     if (!props.profile) {
         return <Preloader/>
-    };
+    }
+    ;
 
     const onSubmitForm = (formData) => {
+        debugger
         props.saveProfile(formData)
-    }
+            .then(() => {
+                setEditMode(false)
+            })
+    };
 
     return (
         <div>
@@ -53,7 +58,10 @@ const Profile = (props) => {
             <div className={s.userInfo}>
                 {props.isOwner ? <input type="file" onChange={onLoadingPhoto}/> : null}
                 <div><b>Name: </b>{props.profile.fullName}</div>
-                {editMode ? <ProfileUserFormRedax profile={props.profile} onSubmit={onSubmitForm}/> : <ProfileUser profile={props.profile} openFormProfile={openFormProfile} isOwner={props.isOwner}/> }
+                {editMode
+                    ? <ProfileUserFormRedax profile={props.profile} onSubmit={onSubmitForm}
+                                            initialValues={props.profile}/>
+                    : <ProfileUser profile={props.profile} openFormProfile={openFormProfile} isOwner={props.isOwner}/>}
                 <StatusUserHooks status={props.status} updateStatus={props.updateStatus}/>
                 <div className={s.form}>
                     <ProfileReduxForm onSubmit={addNewText}/>
